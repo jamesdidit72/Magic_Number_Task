@@ -1,6 +1,7 @@
 # magic number game
 
 import random
+
 game_starter_message = "Guess a number between 1- 100"
 game_active = True
 while game_active:
@@ -11,6 +12,7 @@ while game_active:
         user_guess = int(input("Enter a guess:  "))
         if user_guess == game_random_number:
             print(game_random_number, ".You guessed correctly")
+            print("well done!")
             game_active = False
         elif user_guess > game_random_number:
             attempts_remaining = attempts_remaining - 1
@@ -21,7 +23,12 @@ while game_active:
         else:
             print(game_random_number, ".Unlucky, try again")
     else:
-        print("Wrong, try again")
+        program_end = input('Press any key to continue, or type "exit" to leave: ')
+        if program_end.upper() == "EXIT":  # checks if the input == "exit"
+            game_active = False  # ends loop
+            print("Exiting...")
+        else:
+            continue
 
 else:
-    print("well done!")
+    game_active = False
