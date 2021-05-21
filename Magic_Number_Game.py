@@ -24,11 +24,11 @@ while game_active:
             print(game_random_number, ".Unlucky, try again")
     else:
         program_end = input('Press any key to continue, or type "exit" to leave: ')
-        if program_end.upper() == "EXIT":  # checks if the input == "exit"
+        exit_rule = program_end.find("exit")
+        if exit_rule > 0:  # checks if the input == "exit"
             game_active = False  # ends loop
             print("Exiting...")
         else:
             continue
-
 else:
     game_active = False
