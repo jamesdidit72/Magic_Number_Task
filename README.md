@@ -34,3 +34,81 @@ The following are the user stories
 * all core 5 user stories should be done
 * program should **not break** when given strings
 * program should use while loop
+
+### User story 1
+#### As a user, I want to be able to guess a number and know if i got it correct or not, so that I can know if I won or not.
+```python
+import random
+
+
+
+game_starter_message = "Guess a number between 1- 100"
+
+game_active = True
+while game_active:
+    game_random_number = random.randint(1, 100)
+    user_guess = int(input("Enter a guess:  "))
+    if user_guess == game_random_number:
+        print(game_random_number, ".You guessed correctly")
+        game_active = False
+    else:
+        print(game_random_number, ".Unlucky, try again")
+print("well done!")
+```
+### User story 2
+#### As a user, I should get feedback if my number is too high or too low, so I can adjust my guess.
+```python
+import random
+game_starter_message = "Guess a number between 1- 100"
+game_active = True
+while game_active:
+    game_random_number = random.randint(1, 100)
+    user_guess = int(input("Enter a guess:  "))
+    if user_guess == game_random_number:
+        print(game_random_number, ".You guessed correctly")
+        game_active = False
+    elif user_guess > game_random_number:     
+        print("Your guess was too high")
+    elif user_guess < game_random_number:
+        print("Your guess was too low")
+    else:
+        print(game_random_number, ".Unlucky, try again")
+print("well done!")
+        
+```
+### User story 3
+#### as a user I should only be able to guess 3 times before a new number is generated
+```python
+# magic number game
+import random
+game_starter_message = "Guess a number between 1- 100"
+game_active = True
+while game_active:
+    game_random_number = random.randint(1, 10)
+    attempts_remaining = 3
+    while attempts_remaining != 0:
+        user_guess = int(input("Enter a guess:  "))
+        if user_guess == game_random_number:
+            print(game_random_number, ".You guessed correctly")
+            game_active = False
+        elif user_guess > game_random_number:
+            attempts_remaining = attempts_remaining - 1
+            print(f"Your guess was too high, {attempts_remaining} attempts remaining")
+        elif user_guess < game_random_number:
+            print(f"Your guess was too low, {attempts_remaining} attempts remaining")
+            attempts_remaining = attempts_remaining - 1
+        else:
+            print(game_random_number, ".Unlucky, try again")
+    else:
+        print("Wrong, try again")
+else:
+    print("well done!")
+```
+### user story 4
+```python
+
+```
+### user story 5
+```python
+
+```
