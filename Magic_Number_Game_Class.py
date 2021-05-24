@@ -3,7 +3,8 @@ import random
 
 class Magic_Number_Game:
 
-    def __init__(self, name, guess_total, correct_guesses, game_active):
+    def __init__(self, name, guess_total, correct_guesses, game_active, range_max):
+        self.range_max = range_max
         self.game_active = True
         self.correct_guesses = correct_guesses
         self.guess_total = guess_total
@@ -12,28 +13,31 @@ class Magic_Number_Game:
     def game_start(self):
         self.name = input('What is your name?  ')
         print(self.name)
-        game_starter_message = "Guess a number between 1- 100"
+        self.range_max = int(input('What is the biggest number you would like to guess?  '))
+        game_starter_message = f"Guess a number between 1 - {self.range_max}"
         print(game_starter_message)
-        test.game()
+        magic_game.game()
 
-    def end_game(self):
+    def game_end(self):
         print(f'thank you {self.name}, for playing!')
         print(f'total guesses = {self.guess_total}')
         print(f'total correct guesses = {self.correct_guesses}')
 
-    def continue_game(self):
+    def game_continue(self):
         program_end = input('Press any key to continue, or type "exit" to leave: ')
         exit_rule = program_end.find("exit")
         if exit_rule > 0:  # checks if the input == "exit"
             self.game_active = False  # ends loop
             print("Exiting...")
-            test.end_game()
+            magic_game.game_end()
         else:
+            magic_game.game()
+
     def game(self):
 
         self.game_active = True
         while self.game_active:
-            game_random_number = random.randint(1, 10)
+            game_random_number = random.randint(1, self.range_max)
             attempts_remaining = 3
             while attempts_remaining != 0:
                 user_guess = int(input("Enter a guess:  "))
@@ -42,22 +46,21 @@ class Magic_Number_Game:
                     print(game_random_number, ".You guessed correctly")
                     print("well done!")
                     self.correct_guesses += 1
-                    test.continue_game()
-                    # game_active = False
+                    magic_game.game_continue()
                     break
                 elif user_guess > game_random_number:
                     attempts_remaining = attempts_remaining - 1
                     print(f"Your guess was too high, {attempts_remaining},{game_random_number} attempts remaining")
-                # elif user_guess < game_random_number:
-                #     print(f"Your guess was too low, {attempts_remaining} attempts remaining")
-                #     attempts_remaining = attempts_remaining - 1
+                elif user_guess < game_random_number:
+                    print(f"Your guess was too low, {attempts_remaining} attempts remaining")
+                    attempts_remaining = attempts_remaining - 1
                 else:
                     print(game_random_number, ".Unlucky, try again")
             else:
-                test.continue_game()
+                magic_game.game_continue()
         else:
             self.game_active = False
 
 
-test = Magic_Number_Game('', 0, 0, True)
-test.game_start()
+magic_game = Magic_Number_Game('', 0, 0, True, 0)
+magic_game.game_start()
